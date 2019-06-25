@@ -1,0 +1,7 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'ReactNativeStarterKit' do
+  pod 'Firebase/Core', '~> 6.2.0'
+  pod 'Firebase/Messaging', '~> 6.2.0'
+end

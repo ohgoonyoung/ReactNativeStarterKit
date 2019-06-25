@@ -1,90 +1,31 @@
 import { registerScreen, registerScreenWithRedux, setRoot, _push } from './modules/navigation'
-import store from './modules/store';
-
-import Menu from './menu';
-
-import Launch from './screens/Launch';
-import Tutorial from './screens/Tutorial';
+import envConfig from './env';
+import Splash from './screens/Splash';
 import Setup from './screens/Setup';
+import WebView from './screens/WebView';
 
 export const registerScreens = (store) => {
-  registerScreen('rnsk.Launch', Launch);
-  registerScreen('rnsk.Tutorial', Tutorial);
-
-  registerScreenWithRedux('rnsk.Setup', Setup, store);
+  registerScreen(envConfig.app+'.Splash', Splash);
+  registerScreenWithRedux(envConfig.app+'.Setup', Setup, store);
+  registerScreenWithRedux(envConfig.app+'.WebView', WebView, store);
 }
 
 export const push = (componentId, componentName, props = {}, title = "", subTitle = "") => {
   switch (componentName) {
-    case 'Regist':
-      _push(componentId, {
-        component: {
-          name: 'rnsk.tabs.Regist',
-          passProps: {
-            passProps: props
-          },
-          options: {
-            topBar: {
-              title: {
-                text: title
-              }
-
+    case 'Test':
+        _push(componentId, {
+          component: {
+            name: envConfig.app+'.Setting',
+            passProps: {
+              passProps: props
+            },
+            options: {
+              topBar: Menu.stack.Setting.nav.topBar,
+              statusBar : Menu.stack.Setting.nav.statusBar
             }
           }
-        }
-      });
+        });
       break;
-
-    case 'ProfileDetail':
-      _push(componentId, {
-        component: {
-          name: 'rnsk.tabs.ProfileDetail',
-          passProps: {
-            passProps: props
-          },
-          options: {
-            topBar: {
-              title: {
-                text: title,
-                fontSize: 13,
-                color: 'white',
-                fontFamily: 'Helvetica',
-                alignment: 'center'
-              },
-              subtitle: {
-                text: subTitle,
-                fontSize: 11,
-                color: 'white',
-                fontFamily: 'Helvetica',
-                alignment: 'center'
-              }
-            }
-          }
-        }
-      });
-      break;
-    case 'ReviewImageViewer':
-      _push(componentId, {
-        component: {
-          name: 'rnsk.tabs.ReviewImageViewer',
-          passProps: {
-            passProps: props
-          },
-          options: {
-            topBar: {
-              title: {
-                text: title,
-                fontSize: 13,
-                color: 'white',
-                fontFamily: 'Helvetica',
-                alignment: 'center'
-              }
-            }
-          }
-        }
-      });
-      break;
-
     default:
 
   }
@@ -92,34 +33,57 @@ export const push = (componentId, componentName, props = {}, title = "", subTitl
 }
 
 export const goToSetup = () =>
-  setRoot('stack', 'rnsk.Setup', [
+  setRoot('stack', envConfig.app+'.Setup', [
     {
       component: {
-        name: 'rnsk.Setup',
+        name: envConfig.app+'.Setup',
+      },
+    },
+  ])
+export const goToLogin = () =>
+  setRoot('stack', envConfig.app+'.Login', [
+    {
+      component: {
+        name: envConfig.app+'.Login',
       },
     },
   ])
 
-export const goToLaunch = () =>
-  setRoot('stack', 'rnsk.Launch', [
+export const goToRegister = () =>
+  setRoot('stack', envConfig.app+'.Register', [
     {
       component: {
-        name: 'rnsk.Launch',
+        name: envConfig.app+'.Register',
+      },
+    },
+  ])
+
+  export const goToStart = () =>
+  setRoot('stack', envConfig.app+'.Start', [
+    {
+      component: {
+        name: envConfig.app+'.Start',
       },
     },
   ])
 
 export const goToTutorial = () =>
-  setRoot('stack', 'rnsk.Tutorial', [
+  setRoot('stack', envConfig.app+'.Tutorial', [
     {
       component: {
-        name: 'rnsk.Tutorial',
+        name: envConfig.app+'.Tutorial',
+      },
+    },
+  ])
+export const goToWebView = () =>
+  setRoot('stack', envConfig.app+'.WebView', [
+    {
+      component: {
+        name: envConfig.app+'.WebView',
       },
     },
   ])
 
-  /*
-export const goToHome = () => {
-  setRoot('bottomTabs', 'bottomtabsId', Menu.nav.bottoms);
-}
-*/
+
+export const goToHome = () =>
+  setRoot('bottomTabs', 'bottomtabsId', Menu.nav.bottoms)

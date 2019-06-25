@@ -33,8 +33,9 @@ function findComponentId(name) {
 
 export const findBottomsTabIndex = (name) => {
 
-  name = name.replace("h3pay.tabs.", "");
-  var tabs = Navigation.store.componentsByName.h3pay.tabs;
+  /*
+  name = name.replace("rnsk.tabs.", "");
+  var tabs = Navigation.store.componentsByName.rnsk.tabs;
   var index = -1;
 
   for (var k in tabs) {
@@ -47,6 +48,7 @@ export const findBottomsTabIndex = (name) => {
     }
   }
   return index;
+  */
 }
 
 

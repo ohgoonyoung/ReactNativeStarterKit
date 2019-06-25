@@ -17,7 +17,35 @@ function auth(state = initialAuthState, action) {
   }
 }
 
+const initialAppVersionState = {
+  appVersion : {"ver": undefined},
+  isUpdateApp : false,
+  fetchingUpdate: false,
+  error : undefined,
+  isPermission : undefined,
+};
+
+function common(state = initialAppVersionState, action) {
+  switch (action.type) {
+    case 'LOAD_APP_VERSION':
+      return { ...state, fetchingUpdate: true };
+    case 'LOAD_APP_VERSION_COMPLETED':
+      return { ...state, fetchingUpdate: false, appVersion : action.appVersion, isUpdateApp : action.isUpdateApp };
+    case 'LOAD_APP_VERSION_ERROR':
+      return { ...state, fetchingUpdate: false, error : action.error };
+    case 'LOAD_PERMISSION':
+      return {...state, fetchingUpdate:true};
+    case 'LOAD_PERMISSION_COMPLETED':
+      return {...state, fetchingUpdate:false, isPermission:action.isPermission };
+    case 'LOAD_PERMISSION_ERROR':
+      return {...state, fetchingUpdate:false, isPermission:action.isPermission, error:action.error};
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   root,
   auth,
+  common
 });

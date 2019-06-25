@@ -1,5 +1,6 @@
 
 import { AsyncStorage, Alert } from 'react-native';
+import envConfig from '../../env';
 export default class Helper {
   static isEmailValid(email) {
     //let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -17,6 +18,31 @@ export default class Helper {
     return (email != '' && email != 'undefined' && regex.test(email));
 
   }
+
+  static getAsyncStorage = async (key) => {
+    let item = undefined;
+    //퍼미션 체크 
+    try {
+      item = await AsyncStorage.getItem(envConfig.storageName + key);
+    } catch (error) {
+    }
+
+    return item;
+  }
+
+  static setAsyncStorage = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(envConfig.storageName + key, value);
+    } catch (error) {
+    }
+  }
+
+  static delay = (delay) => {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  }
+
+  /*
 
   static setAsyncStorage(key, value) {
     return new Promise((resolve, reject) => {
@@ -40,4 +66,6 @@ export default class Helper {
       }
     })
   }
+
+  */
 }
