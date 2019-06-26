@@ -6,17 +6,19 @@ import {InjectedScript} from '../../js/webview/InjectedScript';
 type Props = {};
 
 export default class WebViewComponent extends Component<Props> {
-
+  constructor(props){
+    super(props);
+    this.webview = null;
+  }
   componentDidMount(){
-    const {webview} = this.refs;
-    this.webviewScript = new InjectedScript(webview);
+    this.webviewScript = new InjectedScript(this.webview);
   }
 
   render() {
     return (
       <View style={styles.container}>
         <WebView
-          ref="webview"
+          ref={(obj)=> this.webview=obj}
           originWhitelist={['*']}
           userAgent={this.props.userAgent}
           style={[ styles.webviewContainer]}

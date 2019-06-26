@@ -17,7 +17,7 @@ class WebView extends Component<Props> {
       userAgent: DeviceInfo.getUserAgent(),
       url: envConfig.WEBVIEW.url
     }
-
+    this.WebViewComponent = null;
   }
 
   _onMessage = () => {
@@ -32,7 +32,7 @@ class WebView extends Component<Props> {
   }
 
   WebViewAlert = () => {
-    const { webviewScript } = this.refs.WebViewComponent;
+    const { webviewScript, webview } = this.WebViewComponent;
     webviewScript.alert("test");
   }
 
@@ -47,8 +47,7 @@ class WebView extends Component<Props> {
 
   handleBackPress = (state) => {
     const { url } = this.state;
-    const {WebViewComponent} = this.refs;
-    const { webview } = WebViewComponent.refs;
+    const { webviewScript, webview } = this.WebViewComponent;
 
     let isExitApp = true;
     var self = this;
@@ -78,7 +77,7 @@ class WebView extends Component<Props> {
     return (
       <View style={styles.container}>
         <WebViewComponent
-          ref="WebViewComponent"
+          ref={(obj)=> this.WebViewComponent = obj}
           url={this.state.url}
           userAgent={this.state.userAgent}
           _onLoadStart={this._onLoadStart.bind(this)}
