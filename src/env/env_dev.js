@@ -16,8 +16,8 @@ module.exports = {
         killSignal: 'SIGKILL',
     },
     WEBVIEW : {
-        enable : true,
-        url : 'http://160.202.161.148:8080/community/main',
+        enable : false,
+        url : '',
         login : {
             uid: '',
             upw: '',
